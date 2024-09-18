@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<br><br>
+<div class="login-form-container">
+    <div class="login-form">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #F5F5F5;
+    }
+
+    .login-form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+    }
+
+    .login-form {
+        max-width: 400px;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .login-form h2 {
+        color: #3cb371;
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    .login-form form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1em;
+        transition: border-color 0.3s ease;
+    }
+
+    .login-form input[type="text"]:focus,
+    .login-form input[type="password"]:focus {
+        border-color: #3cb371;
+        outline: none;
+    }
+
+    .login-form button {
+        background-color: #3cb371;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .login-form button:hover {
+        background-color: #3cb371;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-form p {
+        margin-top: 15px;
+        font-size: 0.9em;
+    }
+
+    .login-form a {
+        color: #3cb371;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .login-form a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}

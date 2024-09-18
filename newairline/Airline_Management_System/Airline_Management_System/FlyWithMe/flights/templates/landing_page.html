@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to FlyWithMe{% endblock %}
+
+{% block content %}
+<div class="landing">
+    <h1>Welcome to FlyFly</h1>
+    <p>Find exclusive offers and the best deals available for you</p>
+    <button class="explore-btn"><a href="{% url 'flight_list' %}">Search Flights</a></button>
+</div>
+
+
+<style>
+    .landing {
+        text-align: center;
+        padding: 50px;
+        background-color: #3cfa6b;
+        color: #42836a;
+        position: relative;
+        overflow: hidden;
+    }
+    .landing h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+    .landing p {
+        font-size: 1.2em;
+    }
+    .explore-btn {
+        padding: 10px 20px;
+        background-color: #42836a;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.1em;
+        transition: transform 0.3s, background-color 0.3s;
+        margin-top: 20px;
+    }
+    .explore-btn:hover {
+        background-color: #808080;
+        transform: scale(1.1);
+    }
+    #cursor {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        background-color: #42836a;
+        border-radius: 50%;
+        pointer-events: none;
+        transition: width 0.3s, height 0.3s, background-color 0.3s;
+        transform: translate(-50%, -50%);
+        will-change: transform;
+    }
+    #cursor.expand {
+        width: 30px;
+        height: 30px;
+        background-color: #9ff536;
+    }
+</style>
+
+<script>
+    let cursor = document.getElementById('cursor');
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+    const speed = 0.2;  // Increased speed for closer following
+
+    function updateCursor() {
+        currentX += (targetX - currentX) * speed;
+        currentY += (targetY - currentY) * speed;
+        cursor.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        requestAnimationFrame(updateCursor);
+    }
+
+    document.addEventListener('mousemove', function(e) {
+        targetX = e.pageX;
+        targetY = e.pageY;
+    });
+
+    document.querySelector('.explore-btn').addEventListener('mouseover', function() {
+        cursor.classList.add('expand');
+    });
+
+    document.querySelector('.explore-btn').addEventListener('mouseout', function() {
+        cursor.classList.remove('expand');
+    });
+
+    updateCursor();
+</script>
+{% endblock %}
